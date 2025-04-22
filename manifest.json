@@ -1,0 +1,37 @@
+{
+	"manifest_version": 3,
+	"name": "Make Gitlab Great",
+	"version": "1.0",
+	"description": "Adds confetti animation and sound when approving merge requests in GitLab",
+	"icons": {
+		"16": "assets/icon16.png",
+		"48": "assets/icon48.png",
+		"128": "assets/icon128.png"
+	},
+	"permissions": ["activeTab", "scripting"],
+	"host_permissions": ["https://gitlab.com/*"],
+	"content_scripts": [
+		{
+			"matches": ["https://gitlab.com/*"],
+			"js": ["assets/confetti.js", "content.js"],
+			"css": ["styles.css"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["assets/confetti-pop-sound.mp3", "assets/revoke-sound.mp3"],
+			"matches": ["https://gitlab.com/*"]
+		}
+	],
+	"action": {
+		"default_popup": "popup.html",
+		"default_icon": {
+			"16": "assets/icon16.png",
+			"48": "assets/icon48.png",
+			"128": "assets/icon128.png"
+		}
+	},
+	"background": {
+		"service_worker": "background.js"
+	}
+}
